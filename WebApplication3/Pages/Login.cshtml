@@ -1,0 +1,62 @@
+﻿@page
+@model WebApplication3.Pages.LoginModel
+@{
+}
+@Html.ValidationSummary(true)
+@using Microsoft.Extensions.Options
+@using WebApplication3.Services
+@inject IOptions<GoogleCaptchaConfig> GoogleCaptchaConfig
+
+<div class="container mt-5">
+
+	<div class="row justify-content-center align-items-center">
+
+		<div class="col-sm-12 col-md-12 col-lg-4">
+			<h1 class="mb-3">Login </h1>
+
+			<form method="post">
+				<input type="hidden" id="loginviewmodeltoken" asp-for="LModel.Token" />
+				
+				<div class="mb-3">
+					<label class="form-label" asp-for="LModel.Email">Email Address</label>
+					<input type="Text" asp-for="LModel.Email" class="form-control" />
+					<span asp-validation-for="LModel.Email" class="text-danger"></span>
+				</div>
+
+				<div class="mb-3">
+					<label class="form-label" asp-for="LModel.Password">Password</label>
+					<input type="Text" asp-for="LModel.Password" class="form-control" />
+					<span asp-validation-for="LModel.Password" class="text-danger"></span>
+				</div>
+
+				<div class="mb-3 form-check">
+					<input type="checkbox" asp-for="LModel.RememberMe" class="form-check-input" />
+					<label class="form-check-label" asp-for="LModel.RememberMe">Remember Me?</label>
+				</div>
+
+				<div class="mb-3">
+					<button type="submit" class="btn btn-primary" >Login</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+@section Scripts{
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+	<script src="https://www.google.com/recaptcha/api.js?render=@GoogleCaptchaConfig.Value.SiteKey"></script>
+	<script>
+		grecaptcha.ready(function () {
+			grecaptcha.execute('@GoogleCaptchaConfig.Value.SiteKey', { action: 'homepage' }).then(function (token) {
+				console.log(token)
+				document.getElementById("loginviewmodeltoken").value = token				// Add your logic to submit to your backend server here.
+			});
+		});
+
+
+	</script>
+
+}
+
+
+

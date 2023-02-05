@@ -1,0 +1,39 @@
+﻿@page
+@model WebApplication3.Pages.Mfa.EnableAuthenticatorModel
+@{
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<h1>
+    Enable 2-factor Authentication
+</h1>
+<p>
+    Enter the following code in your authenticqator App:
+</p>
+
+<h2>
+    @Model.SharedKey
+</h2>
+
+<form method="post">
+    <table>
+        <tr>
+            <td>
+                <label asp-for="Code"></label>
+            </td>
+            <td>
+                <input asp-for="Code"/>
+
+            </td>
+            <td>
+                <span asp-validation-for="Code"></span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align:right">
+                <input type="submit" value="Enable 2-factor Auth!" />
+
+            </td>
+        </tr>
+    </table>
+</form>

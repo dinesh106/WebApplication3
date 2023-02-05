@@ -1,0 +1,112 @@
+﻿@page
+@model WebApplication3.Pages.userProfileModel
+@{
+}
+<style>
+    .card {
+        width: 350px;
+        height: 150px;
+        border-radius: 14px;
+        padding: 20px;
+        position: relative;
+    }
+
+    .card  {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        background-color: #fff;
+        z-index: 10;
+        border-radius: 10px;
+        padding: 15px;
+        padding-top: 50px;
+    }
+
+
+
+
+
+
+
+
+</style>
+<div class="text-center">
+    <br />
+    <br/>
+   
+    <h1 class="display-4">Customer Details</h1>
+
+    <br />
+    <br /> 
+   
+</div>
+
+
+
+
+
+<div>
+
+    @foreach (var item in Model.myprofiles)
+    {
+        <div class="card" data-label="Coming Soon">
+            <div class="card-container">
+                <h4>Details</h4>
+                <P>First name: @item.FirstName</P>
+                <P>Last name: @item.LastName</P>
+                <P> Gender: @item.Gender</P>
+                <P>NRIC: @item.NRIC</P>
+                <P>Email address: @item.Email</P>
+                <P>Date of Birth: @item.BirthDate</P>
+                <P>WhoamI: @item.WhoamI</P>
+                <P>
+                    resume:
+                    @if (item.Resume != null)
+                    {
+                        <form asp-page-handler="Download" method="post" asp-route-id="@item.Email">
+                            <input type="submit" class="btn btn-dark" value="Download">
+
+                        </form>
+                    }
+                </P>
+
+            </div>
+        </div>
+        @*<tr>
+            <td>
+                First name: @item.FirstName
+            </td>
+            <td>
+                Last name: @item.LastName
+            </td>
+            <td>
+                Gender: @item.Gender
+            </td>
+            <td>
+                NRIC: @item.NRIC
+            </td>
+            <td>
+                Email address: @item.Email
+            </td>
+            <td>
+                Date of Birth: @item.BirthDate
+            </td>
+            <td>
+                WhoamI: @item.WhoamI
+            </td>
+            <td>
+                resume:
+                @if (item.Resume != null)
+                {
+                    <form asp-page-handler="Download" method="post" asp-route-id="@item.Email">
+                        <input type="submit" class="btn btn-dark" value="Download">
+
+                    </form>
+                }
+            </td>
+        </tr>*@
+    }
+
+
+
+</div>
